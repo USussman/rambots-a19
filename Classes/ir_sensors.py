@@ -2,15 +2,12 @@
 import RPi.GPIO as GPIO
 
 class IRSensor:
-    def __init__(self, out_led_pin, channel):
+    def __init__(self, channel):
 
         self.channel = channel
-        self.out_led_pin = out_led_pin
 
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(out_led_pin, GPIO.OUT)
         GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.output(out_led_pin, GPIO.HIGH)
 
         GPIO.add_event_detect(channel, GPIO.RISING, callback=on_callback)
         GPIO.add_event_detect(channel, GPIO.FALLING, callback=off_callback)
@@ -29,7 +26,7 @@ class IRSensor:
 class LineSensor:
     
     def __init__(self):
-        self.left = IRSensor(0, 0)
-        self.right = IRSensor(0, 0)
-        self.front = IRSensor(0, 0)
-        self.back = IRSensor(0, 0)
+        self.left = IRSensor(0)
+        self.right = IRSensor(0)
+        self.front = IRSensor(0)
+        self.back = IRSensor(0)
