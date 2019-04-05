@@ -4,6 +4,7 @@ import multiprocessing as mp
 import imutils
 from distance import distance, distance2
 
+
 class Camera:
     """
     A class for interfacing with camera for 360 view.
@@ -21,6 +22,7 @@ class Camera:
     process : mp.Process
         multiprocessing Process object for object position evaluation loop
     """
+
     def __init__(self):
         """
         Initializes class attributes.
@@ -30,6 +32,7 @@ class Camera:
         Initializes camera object and loads maps.
         Creates and starts image evaluation process loop.
         """
+
         # Create shared memory variables
         # ball info
         self._radius = mp.Value('d')
@@ -78,6 +81,7 @@ class Camera:
         :param frame: frame from camera
         :return: saves location to shared memory
         """
+
         # convert to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 

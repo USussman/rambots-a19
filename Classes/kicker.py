@@ -1,6 +1,7 @@
 from motor import Motor
 import time
 
+
 class Kicker:
     """
     A class for controlling solenoid using L298N object.
