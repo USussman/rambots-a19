@@ -1,7 +1,29 @@
 import RPi.GPIO as GPIO
 
+
 class Motor:
+    """
+    A class for interfacing with L298N over GPIO
+
+    Methods
+    -------
+    run(speed)
+        Sets motor to a given speed.
+    on()
+        Turns on motor forward.
+    off()
+        Turns off motor forward.
+    """
     def __init__(self, speed, forward, backward):
+        """
+        Initializes control pins and creates PWM object.
+
+        :param speed: speed control GPIO pin number
+        :param forward: forward direction GPIO pin number
+        :param backward: backward direction GPIO pin number
+        """
+
+        # TODO : determine correct pin mode
         #GPIO.setmode()
         self.forward = forward
         self.backward = backward
