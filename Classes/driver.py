@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-from Adafruit_MotorHAT import Adafruit_MotorHAT
+"""
+Driver class module
+
+Classes
+-------
+Driver
+    interface with wheels for holonomic drive
+"""
+
+from motor import Motor
 import math
 
 
@@ -18,13 +27,13 @@ class Driver:
     halt()
         drive wrapper to stop robot
     """
-    def __init__(self):
+
+    def __init__(self, *pins):
         """
         Creates motor object attributes.
         """
-        mh = Adafruit_MotorHAT(addr=0x60)
 
-        self.motors = tuple(mh.getMotor(n) for n in (1, 2, 3, 4))
+        self.motors = tuple(Motor(*pin_set) for pin_set in pins)
 
     def drive(self, x, y, r):
         """
@@ -34,6 +43,7 @@ class Driver:
         :param y: y velocity
         :param r: rotation
         """
+
         mpowers = [0, 0, 0, 0]
 
         x = min(max(x, -100), 100)
@@ -52,12 +62,9 @@ class Driver:
             scale = 0
             
         mpowers = tuple(m * scale for m in mpowers)
-        
-        mmode = tuple(Adafruit_MotorHAT.RELEASE if m == 0 else (Adafruit_MotorHAT.FORWARD if m > 0 else Adafruit_MotorHAT.BACKWARD) for m in mpowers)
-        
+
         for i in range(4):
-            self.motors[i].setSpeed(abs(int(mpowers[i])))
-            self.motors[i].run(mmode[i])
+            self.motors[i].run(mpowers[i])
 
     def rDrive(self, a, v, r):
         """
