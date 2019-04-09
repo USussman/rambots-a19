@@ -12,7 +12,10 @@ class Compass:
     -------
     heading()
         :returns: heading of board
+    heading2()
+        :returns: heading of board
     """
+
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
         self.sensor = adafruit_lsm303.LSM303(i2c)
