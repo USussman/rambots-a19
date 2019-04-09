@@ -1,4 +1,15 @@
 #!/usr/bin/env python
+"""
+A module for interfacing with line sensors.
+
+Classes
+-------
+IRSensor
+    individual sensor class
+LineSensor
+    all sensor class
+"""
+
 import RPi.GPIO as GPIO
 
 
@@ -33,7 +44,6 @@ class IRSensor:
 
     def __del__(self):
         GPIO.remove_event_detect(self.channel)
-        GPIO.output(self.out_led_pin, GPIO.HIGH)
         GPIO.cleanup()
 
 
@@ -53,13 +63,18 @@ class LineSensor:
         back IRSensor object
     """
 
-    def __init__(self):
+    def __init__(self, left, right, front, back):
         """
         Initializes one sensor object for each direction.
+
+        :param left: left sensor output pin number
+        :param right: right sensor output pin number
+        :param front: front sensor output pin number
+        :param back: back sensor output pin number
         """
 
         # TODO : add pin numbers
-        self.left = IRSensor(0)
-        self.right = IRSensor(0)
-        self.front = IRSensor(0)
-        self.back = IRSensor(0)
+        self.left = IRSensor(left)
+        self.right = IRSensor(right)
+        self.front = IRSensor(front)
+        self.back = IRSensor(back)
