@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 from motor import Motor
 
+# TODO : set default speed
+# TODO : determine how many pins needed
 SPEED = 0
 
 
@@ -17,6 +19,14 @@ class Dribbler:
     """
 
     def __init__(self, speed, forward, backward):
+        """
+        Initialize a Motor object for dribbler.
+
+        :param speed: speed pin number
+        :param forward: forward pin number
+        :param backward: backward pin number
+        """
+
         self.motor = Motor(speed, forward, backward)
 
     def dribble(self):
