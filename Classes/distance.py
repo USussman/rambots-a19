@@ -7,6 +7,8 @@ CAMERA_MIRROR_HEIGHT = 0.0
 
 MIRROR_RADIUS = MIRROR_HEIGHT/2 + CHORD_LENGTH**2/(8 * MIRROR_HEIGHT)
 
+INNER_RADIUS = 0.0
+
 
 def distance(pixel_size):
     """
@@ -17,6 +19,7 @@ def distance(pixel_size):
     """
 
     # TODO : determine units of distance output
+    pixel_size += INNER_RADIUS
     width = math.sqrt(pixel_size**2 * CAMERA_MIRROR_HEIGHT**2) / (FOCAL_LENGTH**2 - pixel_size**2)
     n =  (CHORD_LENGTH + CAMERA_MIRROR_HEIGHT) * width
     d = MIRROR_HEIGHT - MIRROR_RADIUS + math.sqrt(MIRROR_RADIUS**2 - width)
@@ -24,6 +27,7 @@ def distance(pixel_size):
 
 
 def distance2(pixel_size):
+    pixel_size += INNER_RADIUS
     width = math.sqrt(pixel_size**2 * CAMERA_MIRROR_HEIGHT**2) / (FOCAL_LENGTH**2 - pixel_size**2)
     temp = MIRROR_RADIUS**2 - (-MIRROR_HEIGHT + 2 * MIRROR_RADIUS + math.sqrt(-width**2 - MIRROR_RADIUS**2))**2
     n = width * (MIRROR_HEIGHT + math.sqrt(temp))
