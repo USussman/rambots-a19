@@ -14,6 +14,7 @@ class Motor:
     off()
         Turns off motor forward.
     """
+
     def __init__(self, speed, forward, backward):
         """
         Initializes control pins and creates PWM object.
