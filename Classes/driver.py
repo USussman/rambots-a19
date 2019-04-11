@@ -66,7 +66,7 @@ class Driver:
         for i in range(4):
             self.motors[i].run(mpowers[i])
 
-    def rDrive(self, a, v, r):
+    def drive_angle(self, a, v, r):
         """
         Wrapper for driving in direction at speed.
 

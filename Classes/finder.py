@@ -5,6 +5,8 @@ import imutils
 from distance import distance, distance2
 
 
+# TODO : test with new height dewarping for reimplementing accurate center distance
+
 class Camera:
     """
     A class for interfacing with camera for 360 view.

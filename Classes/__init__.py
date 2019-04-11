@@ -7,6 +7,9 @@ from ir_sensors import LineSensor
 import pins
 
 
+CAPTURING_TOLERANCE = 30
+APPROACH_BUFFER = 25
+
 class Director:
     def __init__(self):
         self.eyes = Camera()
@@ -18,7 +21,16 @@ class Director:
 
     def direct(self):
         while True:
-            ...
+            rho = self.eyes.distance
+            theta = self.eyes.direction
+
+            if abs(theta) < CAPTURING_TOLERANCE:
+                self.legs.drive_angle(theta, 100, 0)
+            elif rho < APPROACH_BUFFER:
+                # Circumnavigate ball
+                ...
+            else:
+                ...
 
 
 if __name__ == '__main__':
