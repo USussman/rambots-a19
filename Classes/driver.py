@@ -1,17 +1,39 @@
 #!/usr/bin/env python3
 from Adafruit_MotorHAT import Adafruit_MotorHAT
-import time
-import atexit
 import math
 
+
 class Driver:
+    """
+    A class for driving the robot.
+
+    Methods
+    -------
+    drive(x, y, r)
+        drive with directional components and rotation.
+    rDrive(a, v, r)
+        wrapper on drive for angle, velocity, rotation
+    spin(r)
+        wrapper to rotate at given speed
+    halt()
+        drive wrapper to stop robot
+    """
     def __init__(self):
+        """
+        Creates motor object attributes.
+        """
         mh = Adafruit_MotorHAT(addr=0x60)
 
         self.motors = tuple(mh.getMotor(n) for n in (1, 2, 3, 4))
 
     def drive(self, x, y, r):
+        """
+        Drive the robot with direction components.
 
+        :param x: x velocity
+        :param y: y velocity
+        :param r: rotation
+        """
         mpowers = [0, 0, 0, 0]
 
         x = min(max(x, -100), 100)
@@ -37,22 +59,33 @@ class Driver:
             self.motors[i].setSpeed(abs(int(mpowers[i])))
             self.motors[i].run(mmode[i])
 
-    # rDrive(a, v, r)
-    # a: angle relative to robot's front, 0-360 degrees
-    # v: velocity, 0-100% of full speed
-    # r: clockwise rotation, 0-100% of full speed
-
     def rDrive(self, a, v, r):
+        """
+        Wrapper for driving in direction at speed.
+
+        :param a: angle relative to robot's front, 0-360 degrees
+        :param v: velocity, 0-100% of full speed
+        :param r: clockwise rotation, 0-100% of full speed
+        """
+
         rad  = (a - 90) * math.pi / 180
         x = v * math.cos(rad)
         y = v * math.sin(rad) * -1
         self.drive(int(x), int(y), r)
 
-    # spin(r):
-    # r: clockwise rotation, 0-100% of full speed
     def spin(self, r):
+        """
+        Spin the robot on spot
+
+        :param r: clockwise rotation, 0-100% of full speed
+        """
+
         self.drive(0, 0, r)
 
     def halt(self):
+        """
+        Stops all wheels.
+        """
+
         self.drive(0, 0, 0)
 
