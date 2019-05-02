@@ -96,3 +96,14 @@ class Driver:
 
         self.drive(0, 0, 0)
 
+    def drive_angle2(self, a, v, r, offset):
+        """
+        Wrapper for rotating while driving in a straight line
+
+        :param a: angle relative to forward direction, 0-360 degrees
+        :param v: velocity, 0-100% of full speed
+        :param r: clockwise rotation, 0-100% of full speed
+        :param offset: offset from forward from compass
+        """
+
+        self.drive_angle((a + offset) % 360, v, r)
