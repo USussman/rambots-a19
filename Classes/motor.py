@@ -28,13 +28,13 @@ class Motor:
         GPIO.setmode(GPIO.BCM)
         self.forward = forward
         self.backward = backward
-        if not forward:
+        if forward:
             GPIO.setup(forward, GPIO.OUT)
             GPIO.output(forward, GPIO.LOW)
-        if not backward:
+        if backward:
             GPIO.setup(backward, GPIO.OUT)
             GPIO.output(backward, GPIO.LOW)
-        if not speed:
+        if speed:
             self.motor = GPIO.PWM(speed, 1000)
             self.motor.start(0)
 
