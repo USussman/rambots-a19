@@ -25,7 +25,7 @@ class Motor:
         """
 
         # TODO : determine correct pin mode
-        #GPIO.setmode()
+        GPIO.setmode(GPIO.BCM)
         self.forward = forward
         self.backward = backward
         if not forward:
