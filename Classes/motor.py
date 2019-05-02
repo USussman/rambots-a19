@@ -35,6 +35,7 @@ class Motor:
             GPIO.setup(backward, GPIO.OUT)
             GPIO.output(backward, GPIO.LOW)
         if speed:
+            GPIO.setup(speed, GPIO.OUT)
             self.motor = GPIO.PWM(speed, 1000)
             self.motor.start(0)
 
