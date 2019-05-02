@@ -57,7 +57,7 @@ class Driver:
         max_power = max(abs(m) for m in mpowers)
         
         if max_power > 0:
-            scale = 255 / max_power
+            scale = 100 / max_power
         else:
             scale = 0
             
