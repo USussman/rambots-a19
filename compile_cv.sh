@@ -4,6 +4,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 VENV=
 PYVERSION=3.7.3
+
 while getopts :hj:ln:s: option
 do
     case "$option" in
@@ -16,6 +17,8 @@ do
 	 esac
 done
 
+sudo apt-get install screen
+
 installPy(){
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -26,25 +29,25 @@ tar xf Python-$PYVERSION.tgz
 cd Python-$PYVERSION/
 
 ./configure --enable-optimizations
-make
+make -j
 make test
 sudo make altinstall
 }
 
 installCV()
 {
-sudo apt-get purge wolfram-engine
-sudo apt-get purge libreoffice*
-sudo apt-get clean
-sudo apt-get autoremove
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install build-essential cmake pkg-config
-sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-sudo apt-get install libxvidcore-dev libx264-dev
-sudo apt-get install libgtk2.0-dev libgtk-3-dev
-sudo apt-get install libatlas-base-dev gfortran
-sudo apt-get install python2.7-dev python3-dev
+sudo apt-get -y purge wolfram-engine
+sudo apt-get -y purge libreoffice*
+sudo apt-get -y clean
+sudo apt-get -y autoremove
+sudo apt-get update && sudo apt-get -y upgrade
+sudo apt-get install -y build-essential cmake pkg-config
+sudo apt-get install -y libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
+sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install -y libxvidcore-dev libx264-dev
+sudo apt-get install -y libgtk2.0-dev libgtk-3-dev
+sudo apt-get install -y libatlas-base-dev gfortran
+sudo apt-get install -y python2.7-dev python3-dev
 cd ~
 wget -O opencv.zip https://github.com/Itseez/opencv/archive/$VERSION.zip
 unzip opencv.zip
