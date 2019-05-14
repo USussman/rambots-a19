@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import multiprocessing as mp
 import imutils
-from distance import distance, distance2
+from .distance import distance, distance2
 
 
 # TODO : test with new height dewarping for reimplementing accurate center distance
@@ -47,6 +47,7 @@ class Camera:
         self._goal = mp.Array('i', 2)
         self._circles = mp.Array('i', 2)
         self.location = mp.Array('i', 2)
+        self.goal_behind = mp.Value('i', 0)
 
         # camera object
         self._cam = cv2.VideoCapture()

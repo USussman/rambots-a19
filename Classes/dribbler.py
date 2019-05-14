@@ -1,5 +1,4 @@
-import RPi.GPIO as GPIO
-from motor import Motor
+from .motor import Motor
 
 # TODO : set default speed
 # TODO : determine how many pins needed

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 Driver class module
 
@@ -8,7 +9,7 @@ Driver
     interface with wheels for holonomic drive
 """
 
-from motor import Motor
+from .motor import Motor
 import math
 
 
@@ -66,7 +67,7 @@ class Driver:
         for i in range(4):
             self.motors[i].run(mpowers[i])
 
-    def drive_angle(self, a, v, r):
+    def drive_angle(self, a, v, r=0):
         """
         Wrapper for driving in direction at speed.
 

@@ -1,14 +1,17 @@
-from direction import Compass
-from driver import Driver
-from kicker import Kicker
-from dribbler import Dribbler
-from finder import Camera
-from ir_sensors import LineSensor
-import pins
+from .direction import Compass
+from .driver import Driver
+from .kicker import Kicker
+from .dribbler import Dribbler
+from .finder import Camera
+from .ir_sensors import LineSensor
+from . import pins
 
 
 CAPTURING_TOLERANCE = 30 # degrees
 APPROACH_BUFFER = 25 # centimeters
+
+GOTCHA_TOLERANCE = 10 # degrees
+GOTCHA_BUFFER = 1 # in centimeters
 
 
 class Director:
@@ -22,19 +25,30 @@ class Director:
 
     def direct(self):
         while True:
-            rho = self.eyes.distance
-            theta = self.eyes.direction
-            comp_offset = 180 - theta
-            if theta > 180:
-                theta -= 360
-            if (180 - abs(180 - theta)) < CAPTURING_TOLERANCE:
-                self.legs.drive_angle(theta, 100, 0)
-            elif rho < APPROACH_BUFFER:
-                # Circumnavigate ball
-                if theta > 0:
-                    self.legs.drive_angle(theta + 90)
-            else:
-                ...
+            self.striker()
+
+    def striker(self):
+        rho = self.eyes.distance
+        theta = self.eyes.direction
+        comp_offset = (180 - abs(180 - theta))
+
+        # control dribbler
+        if comp_offset < CAPTURING_TOLERANCE:
+            self.dribbler.dribble()
+        else:
+            self.dribbler.stop()
+
+        if rho < GOTCHA_BUFFER and comp_offset < GOTCHA_TOLERANCE:
+            # we have the ball
+            self.legs.drive_angle(0, 100)
+        elif rho < APPROACH_BUFFER and comp_offset > CAPTURING_TOLERANCE:
+            # Circumnavigate ball
+            self.legs.drive_angle(theta + 90 if theta < 180 else theta - 90)
+        else:
+            self.legs.drive_angle(theta, 100)
+
+    def goalie(self):
+
 
 
 if __name__ == '__main__':
