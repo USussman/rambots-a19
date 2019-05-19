@@ -1,5 +1,4 @@
 from .motor import Motor
-import time
 
 
 class Kicker:
