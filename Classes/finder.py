@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import multiprocessing as mp
 import imutils
-from .distance import distance, distance2
+#from .distance import distance, distance2
 
 
 # TODO : test with new height dewarping for reimplementing accurate center distance
@@ -199,7 +199,7 @@ class Camera:
 
         # Calculate direction of ball
         theta = (cx/w) * (2 * np.pi)
-        rho = distance(cy)
+        rho = cy#distance(cy)
 
         x, y = rho * np.cos(theta), rho * np.sin(theta)
 
@@ -287,7 +287,7 @@ class Camera:
 
         # Calculate direction of ball
         theta = (cx/w) * (2 * np.pi)
-        rho = distance(cy)
+        rho = cy#distance(cy)
 
         x, y = rho * np.cos(theta), rho * np.sin(theta)
 
