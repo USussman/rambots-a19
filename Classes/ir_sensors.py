@@ -30,7 +30,7 @@ class IRSensor:
         """
         self.channel = channel
 
-        GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         GPIO.add_event_detect(channel, GPIO.RISING, callback=self._on_callback)
