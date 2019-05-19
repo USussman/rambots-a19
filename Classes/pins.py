@@ -7,4 +7,6 @@ motors = (
 
 #dribbler = (speed, forward, backward)
 kicker = (21)
-#line_sensors = (in1, in2, in3, in4)'''
+line_sensors = (22, 23, 14, 3)
+
+ball_sensor = (13)
