@@ -17,7 +17,7 @@ class Kicker:
         """
         self.solenoid = Motor(False, output, False)
 
-    def kick(self, power):
+    def kick(self):
         """
         Engages solenoid.
         :param power: controls kick strength by power time
@@ -25,4 +25,3 @@ class Kicker:
 
         # TODO : set default power
         self.solenoid.on()
-        time.sleep(power * 10)

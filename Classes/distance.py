@@ -33,3 +33,7 @@ def distance2(pixel_size):
     n = width * (MIRROR_HEIGHT + math.sqrt(temp))
     d = MIRROR_HEIGHT - MIRROR_RADIUS + math.sqrt(MIRROR_RADIUS**2 - temp)
     return n / d
+
+
+def distance3(pixel_size):
+    pixel_size += INNER_RADIUS
