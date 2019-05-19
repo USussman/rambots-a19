@@ -48,7 +48,17 @@ class Director:
             self.legs.drive_angle(theta, 100)
 
     def goalie(self):
+        rho = self.eyes.distance
+        theta = self.eyes.direction
+        comp_offset = (180 - abs(180 - theta))
 
+        if 3 < theta < 90:
+            self.legs.drive_angle(90, theta / 90 * 100)
+        elif 270 < theta < 357:
+            self.legs.drive_angle(90, theta / 90 * 100)
+        elif rho < 2:
+            # Charge!!
+            ...
 
 
 if __name__ == '__main__':
